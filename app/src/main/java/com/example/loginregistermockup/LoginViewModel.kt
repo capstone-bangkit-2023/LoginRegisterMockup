@@ -1,4 +1,6 @@
 package com.example.loginregistermockup
 
-class LoginViewModel {
+import androidx.lifecycle.ViewModel
+
+class LoginViewModel : ViewModel() {
 }
