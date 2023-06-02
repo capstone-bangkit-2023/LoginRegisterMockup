@@ -27,6 +27,8 @@ class Register2Activity : AppCompatActivity() {
                 binding.username.error = "Isi username"
             } else if (password.isEmpty()) {
                 binding.password.error = "Isi password"
+            } else if (password.length < 8) {
+                binding.password.error = "Password kurang dari 8 karakter"
             } else if (confirmPass.isEmpty()) {
                 binding.confirmPassword.error = "Isi password"
             } else if (password != confirmPass) {
