@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
@@ -32,6 +33,20 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.loginBtn.setOnClickListener {
+            val username = binding.username.text.toString()
+            val password = binding.password.text.toString()
+
+            if (password.length < 8) {
+                binding.username.error = "Min 8 char"
+            } else if (username.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Fill detail", Toast.LENGTH_SHORT).show()
+            } else if (username.isNotEmpty() && password.isNotEmpty()) {
+                viewModel.postLogin(username, password)
+            }
+
+            viewModel.loginResult.observe(this) {
+                tokenViewModel.saveToken(it.accessToken)
+            }
 
         }
     }
