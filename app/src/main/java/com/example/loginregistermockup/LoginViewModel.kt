@@ -28,7 +28,7 @@ class LoginViewModel : ViewModel() {
                         _loginResult.value = response.body()!!.data
                     }
                 } else {
-                    Log.e("postLogin", "isFailed")
+                    _loginMsg.value = response.body()!!.status
                 }
             }
 
