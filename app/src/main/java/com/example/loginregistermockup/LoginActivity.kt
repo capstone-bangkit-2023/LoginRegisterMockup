@@ -28,6 +28,15 @@ class LoginActivity : AppCompatActivity() {
         val tokenViewModel = ViewModelProvider(this, ViewModelFactory(pref))[TokenViewModel::class.java]
         val viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 
+        tokenViewModel.getToken().observe(this) {
+            if (it != "") {
+                viewModel.loginMsg.observe(this) { msg ->
+                    Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
+                }
+                startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))
+            }
+        }
+
         binding.registerBtn.setOnClickListener {
             startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
         }
@@ -39,7 +48,7 @@ class LoginActivity : AppCompatActivity() {
             if (password.length < 8) {
                 binding.username.error = "Min 8 char"
             } else if (username.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Fill detail", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Fill detail", Toast.LENGTH_LONG).show()
             } else if (username.isNotEmpty() && password.isNotEmpty()) {
                 viewModel.postLogin(username, password)
             }
