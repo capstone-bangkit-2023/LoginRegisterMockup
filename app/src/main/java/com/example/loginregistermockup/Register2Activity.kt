@@ -3,6 +3,7 @@ package com.example.loginregistermockup
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import com.example.loginregistermockup.databinding.ActivityRegister2Binding
 
 class Register2Activity : AppCompatActivity() {
@@ -13,6 +14,8 @@ class Register2Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRegister2Binding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val viewModel = ViewModelProvider(this)[RegisterViewModel::class.java]
 
         val fullname = intent.getStringExtra("fullname")
         val school = intent.getStringExtra("school")
@@ -38,7 +41,10 @@ class Register2Activity : AppCompatActivity() {
             } else if (password != confirmPass) {
                 Toast.makeText(this, "Password dan ConfirmPassword tidak sama", Toast.LENGTH_LONG).show()
             } else {
-                //Register to server
+                viewModel.postRegister(username, password, confirmPass, fullname!!, school, email!!)
+                viewModel.registerMsg.observe(this) {
+                    Toast.makeText(this@Register2Activity, it, Toast.LENGTH_LONG).show()
+                }
             }
         }
     }

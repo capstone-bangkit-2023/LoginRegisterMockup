@@ -15,8 +15,8 @@ class RegisterViewModel : ViewModel() {
     private val _registerMsg = MutableLiveData<String>()
     val registerMsg: LiveData<String> = _registerMsg
 
-    fun postRegister(username: String, password: String, confirmPassword: String, namaSekolah: String, email: String) {
-        val api = ApiConfig.getApiService().registerApi(username, password, confirmPassword, namaSekolah, email)
+    fun postRegister(username: String, password: String, confirmPassword: String, nama: String, namaSekolah: String?, email: String) {
+        val api = ApiConfig.getApiService().registerApi(username, password, confirmPassword, nama, namaSekolah, email)
         api.enqueue(object : Callback<RegisterResponse> {
             override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {
                 if (response.isSuccessful) {
