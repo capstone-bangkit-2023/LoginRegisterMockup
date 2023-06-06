@@ -16,6 +16,7 @@ interface ApiService {
         @Field("username") username: String,
         @Field("password") password: String,
         @Field("confirmPassword") confirmPassword: String,
+        @Field("nama") fullname: String,
         @Field("namaSekolah") namaSekolah: String? = null,
         @Field("email") email: String
     ) : Call<RegisterResponse>
