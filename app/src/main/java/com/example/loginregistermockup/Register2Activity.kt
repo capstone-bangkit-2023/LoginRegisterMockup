@@ -14,6 +14,10 @@ class Register2Activity : AppCompatActivity() {
         binding = ActivityRegister2Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val fullname = intent.getStringExtra("fullname")
+        val school = intent.getStringExtra("school")
+        val email = intent.getStringExtra("email")
+
         binding.registerBtnApi.setOnClickListener {
             val username = binding.username.text.toString()
             val password = binding.password.text.toString()

@@ -17,21 +17,20 @@ class RegisterActivity : AppCompatActivity() {
         binding.nextBtn.setOnClickListener {
             val fullName = binding.fullname.text.toString()
             val school = binding.school.text.toString()
-            val phone = binding.phone.text.toString()
+            val email = binding.email.text.toString()
 
-            if (fullName.isEmpty() && phone.isEmpty()) {
+            if (fullName.isEmpty() && email.isEmpty()) {
                 binding.fullname.error = "Isi nama"
-                binding.phone.error = "Isi No HP"
-            } else if (phone.isEmpty()) {
-                binding.phone.error = "Isi No HP"
+                binding.email.error = "Isi Email"
+            } else if (email.isEmpty()) {
+                binding.email.error = "Isi Email"
             } else if (fullName.isEmpty()) {
                 binding.fullname.error = "Isi nama"
             } else {
                 val intent = Intent(this, Register2Activity::class.java)
-                /* Implement later
                 intent.putExtra("fullname", fullName)
                 intent.putExtra("school", school)
-                intent.putExtra("phone", phone)*/
+                intent.putExtra("email", email)
                 startActivity(intent)
             }
         }
